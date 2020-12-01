@@ -36,7 +36,10 @@ class CLI
 
     def gets_username
         print "Please enter your Apex Legends User name : "
-        gets.chomp
+        user = gets.chomp
+        if user.include?(' ')
+            user.gsub(' ', '%20')
+        end
     end
 
     def main_menu
