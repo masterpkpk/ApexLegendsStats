@@ -1,5 +1,3 @@
-require_relative "../config/enviornment.rb"
-
 class UrlCreator
 
     def url_creator(platform, user)
