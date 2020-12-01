@@ -5,14 +5,23 @@ class CLI
 
     def start
         puts "Welcome to the Apex Legends Stat viewer!"
+        get_user_data
+        if @json_data["errors"]
+            puts "invalid usernam. Try again"
+            get_user_data
+        end
+            
+        main_menu
+
+    end
+
+    def get_user_data
         platform = gets_platform
         username = gets_username
         data = UrlCreator.new.url_creator(platform, username)
         @json_data = JsonParser.new.parse(data)
-        
-        main_menu
-
     end
+
     
     def gets_platform
         print "Please enter your platform (xbl/psn/origin) : "
