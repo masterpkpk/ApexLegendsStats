@@ -4,10 +4,10 @@ class CLI
 
 
     def start
-        puts "Welcome to the Apex Legends Stat viewer!"
+        puts "Welcome to the Apex Legends stat viewer!"
         get_user_data
         if @json_data["errors"]
-            puts "invalid usernam. Try again"
+            puts "invalid username. Try again."
             get_user_data
         end
             
@@ -35,19 +35,22 @@ class CLI
     end
 
     def gets_username
-        print "Please enter your Apex Legends User name : "
+        print "Please enter your Apex Legends username : "
         user = gets.chomp
         if user.include?(' ')
             user.gsub(' ', '%20')
+        else 
+            user
         end
     end
 
     def main_menu
         puts "Please enter a number to see the desired data or to exit"
-        puts "1. Last Legend Played"
-        puts "2. Player total kills."
+        puts "1. Last Legend Played."
+        puts "2. Player Total Kills."
         puts "3. Player Rank."
-        puts "4. Exit"
+        puts "4. Exit."
+        print "Menu Select: "
         menu_options
 
     end
@@ -64,9 +67,10 @@ class CLI
             puts RankScore.new.total(@json_data)
             main_menu
         elsif input == "4"
+            puts "Goodbye!"
             exit
         else
-            puts "Please enter a valid number"
+            puts "Please enter a valid number."
             menu_options
         end
     end
