@@ -1,7 +1,7 @@
 require 'net/http'
 require 'open-uri'
 require 'json'
-require 'awesome_print'
+
 
 require_relative "../lib/UrlCreator.rb"
 require_relative "../lib/json_parser.rb"
