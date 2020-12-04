@@ -18,8 +18,11 @@ class CLI
     def get_user_data
         platform = gets_platform
         username = gets_username
-        data = UrlCreator.new.url_creator(platform, username)
-        @json_data = JsonParser.new.parse(data)
+        data = Url.new.url_creator(platform, username)
+        @json_data = Url.new.parse(data)
+        @player = Player.new(username, platform, @json_data["data"]["segments"][0]["stats"]["rankScore"]["metadata"]["rankName"],
+        @json_data["data"]["segments"][0]["stats"]["kills"]["displayValue"],
+        @json_data["data"]["metadata"]["activeLegendName"])
     end
 
     
@@ -37,6 +40,7 @@ class CLI
     def gets_username
         print "Please enter your Apex Legends username : "
         user = gets.chomp
+        user.downcase
         if user.include?(' ')
             user.gsub(' ', '%20')
         else 
@@ -58,15 +62,22 @@ class CLI
     def menu_options
         input = gets.chomp
         if input == "1"
-            puts LastPlayedLegend.new.total(@json_data)
+            puts "\n"
+            puts "The last legend you played was #{@player.legend}."
+            puts "\n"
             main_menu
         elsif input == "2"
-            puts Kills.new.total(@json_data)
+            puts "\n"
+            puts "You have a total of #{@player.kills} kills!"
+            puts "\n"
             main_menu
         elsif input == "3"
-            puts RankScore.new.total(@json_data)
+            puts "\n"
+            puts "Your rank is #{@player.rank}."
+            puts "\n"
             main_menu
         elsif input == "4"
+            puts "\n"
             puts "Goodbye!"
             exit
         else
@@ -77,4 +88,6 @@ class CLI
 
 
 end
+
+
 
