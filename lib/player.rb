@@ -10,6 +10,7 @@ class Player
         @rank = rank
         @kills = kills
         @legend = legend
+        @@all << self
         
     end
 
