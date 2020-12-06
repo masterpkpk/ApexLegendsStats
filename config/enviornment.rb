@@ -5,7 +5,6 @@ require 'json'
 
 require_relative "../lib/Url"
 require_relative "../lib/cli"
-require_relative "../lib/stats"
 require_relative "../lib/player"
 
 
